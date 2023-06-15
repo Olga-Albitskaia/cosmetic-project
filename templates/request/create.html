@@ -1,0 +1,26 @@
+<!-- frontend/site/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+    <title>{{ view.title }}</title>
+{% endblock head %}
+
+{% block content %}
+
+    <ol class="breadcrumb">
+        <li><a href="{% url "home" %}">Главная</a></li>
+        <li><a href="{% url "request-list" %}">Заявки</a></li>
+        <li class="active">{{ view.title }}</li>
+    </ol>
+
+    <h1>{{ view.title }}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form|crispy }}
+        <button type="submit">Сохранить</button>
+    </form>
+
+
+{% endblock content %}

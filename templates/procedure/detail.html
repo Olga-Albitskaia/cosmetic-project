@@ -1,0 +1,55 @@
+<!-- frontend/site/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+    <title>{{ object }}</title>
+{% endblock head %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li><a href="{% url "home" %}">Главная</a></li>
+        <li><a href="{% url "procedure-list" %}">Процедуры</a></li>
+        <li class="active">{{ object }}</li>
+    </ol>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>{{ object }}</h1>
+
+    {% if request.user.user_type_id == 3 %}
+    {% endif %}
+
+    <table id="w0" class="table table-striped table-bordered detail-view">
+        <tr>
+            <th>Название</th>
+            <td><b>{{ object.title }}</b></td>
+        </tr>
+        <tr>
+            <th>Процедура</th>
+            <td>{{ object.image_img }}</td>
+        </tr>
+
+
+        <tr>
+            <th>Описание</th>
+            <td align="justify">{{ object.description | linebreaksbr }}</td>
+        </tr>
+        <tr>
+            <th>Продолжительность, мин.</th>
+            <td>{{ object.duration }}</td>
+        </tr>
+        <tr>
+            <th>Цена, руб.</th>
+            <td><b>{{ object.cost }}</b></td>
+        </tr>
+
+
+
+    </table>
+
+    <p>
+        <a href="{% url "request-create-by-id" object.id %}" class="btn btn-success" >Оставить заявку</a>
+    </p>
+
+{% endblock content %}

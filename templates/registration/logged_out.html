@@ -1,0 +1,15 @@
+<!-- registration/login.html -->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block head %}
+    <title>{{view.title}}</title>
+{% endblock head %}
+
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <p>Вы вышли из системы!</p>
+    <a href="{% url 'login' %}">Войти снова</a>
+{% endblock %}

@@ -1,0 +1,75 @@
+<!-- frontend/site/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+    <title>{{ object }}</title>
+{% endblock head %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li><a href="{% url "home" %}">Главная</a></li>
+        <li><a href="{% url "catalog-list" %}">Каталог товаров</a></li>
+        <li class="active">{{ object }}</li>
+    </ol>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>{{ object }}</h1>
+    <p>
+        <a href="{% url "basket-product-add" object.id %}" class="btn btn-success" >В корзину</a>
+    </p>
+    {% if request.user.user_type_id == 3 %}
+    {% endif %}
+
+    <table id="w0" class="table table-striped table-bordered detail-view">
+        <tr>
+            <th>Бренд</th>
+            <td><b>{{ object.brand.title }}</b></td>
+        </tr>
+        <tr>
+            <th>Название</th>
+            <td><b>{{ object.title }}</b></td>
+        </tr>
+        <tr>
+            <th>Товар</th>
+            <td>{{ object.image_img }}</td>
+        </tr>
+        <tr>
+            <th>Описание</th>
+            <td>{{ object.description | linebreaksbr }}</td>
+        </tr>
+        <tr>
+            <th>Цена, руб.</th>
+            <td><b>{{ object.cost }}</b></td>
+        </tr>
+        <tr>
+            <th>Количество на складе</th>
+            <td>{{ object.get_total_count }}</td>
+        </tr>
+        <tr>
+            <th>Единица измерения</th>
+            <td>{{ object.unit.title }}</td>
+        </tr>
+        <tr>
+            <th>Категория</th>
+            <td>{{ object.category.title }}</td>
+        </tr>
+
+        {% if object.production_date %}
+        <tr>
+            <th>Дата выработки</th>
+            <td>{{ object.production_date | date }}</td>
+        </tr>
+         {% endif %}
+
+        {% if object.expiration_date %}
+        <tr>
+            <th>Срок годности</th>
+            <td>{{ object.expiration_date | date  }}</td>
+        </tr>
+        {% endif %}
+
+
+    </table>
+{% endblock content %}

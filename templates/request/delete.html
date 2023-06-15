@@ -1,0 +1,27 @@
+<!-- frontend/site/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+    <title>{{ view.title }}</title>
+{% endblock head %}
+
+{% block content %}
+
+    <ol class="breadcrumb">
+        <li><a href="{% url "home" %}">Главная</a></li>
+        <li><a href="{% url "document-list" %}">Документы</a></li>
+        <li><a href="{% url "document-detail" object.id %}">{{ object }}</a></li>
+        <li class="active">{{ view.title }}</li>
+    </ol>
+
+    <h1>{{ view.title }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <p>Удалить "{{ object }}"?</p>
+        <input type="submit" value="Удалить"/>
+    </form>
+
+{% endblock content %}

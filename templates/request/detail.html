@@ -1,0 +1,96 @@
+<!-- frontend/site/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+    <title>{{ object }}</title>
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+{% endblock head %}
+
+{% block content %}
+
+    <ol class="breadcrumb">
+        <li><a href="{% url "home" %}">Главная</a></li>
+        <li><a href="{% url "request-list" %}">Заявки</a></li>
+        <li class="active">{{ object }}</li>
+    </ol>
+
+    <h1>{{ object }}</h1>
+
+    <p>
+        <a href="{% url "request-create" %}" class="btn btn-success">Оставить заявку</a>
+        <a href="{% url "request-update" object.id %}" class="btn btn-primary">Редактировать</a>
+        <a href="{% url "request-delete" object.id %}" class="btn btn-danger">Удалить</a>
+    </p>
+
+
+
+
+    {#    {% if request.user.user_type_id == 3 %}#}
+    {#    {% endif %}#}
+    {#    #}
+    <table id="w0" class="table table-striped table-bordered detail-view">
+        <tr>
+            <th>Идентификатор заявки</th>
+            <td>{{ object.id }}</td>
+        </tr>
+        <tr>
+            <th>Дата регистрации</th>
+            <td>{{ object.registration_date }}</td>
+        </tr>
+        <tr>
+            <th>Пациент</th>
+            <td>{{ object.patient }}</td>
+        </tr>
+        <tr>
+            <th>Процедура</th>
+            <td>{{ object.procedure }}</td>
+        </tr>
+        <tr>
+            <th>Дата</th>
+            <td>{{ object.begin_date }}</td>
+        </tr>
+        <tr>
+            <th>Примечание</th>
+            <td>{{ object.description }}</td>
+        </tr>
+        <tr>
+            <th>Обработано</th>
+            <td>{{ object.completed | yesno }}</td>
+        </tr>
+
+    </table>
+
+
+
+    {#    <div class="row">#}
+    {#        <div class="col-md-10">#}
+    {#            #}
+    {#        </div>#}
+    {#        <div class="col-md-2">#}
+    {#            #}
+    {#            <div class="list-group">#}
+    {#                <a href="{{ object.url }}" class="list-group-item" target="_blank">#}
+    {#                    Ссылка VK#}
+    {#                </a>#}
+    {#                <a href="https://vk.com/stats?gid={{ object.community_id }}" class="list-group-item" target="_blank">#}
+    {#                    Статистика VK#}
+    {#                </a>#}
+    {##}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
